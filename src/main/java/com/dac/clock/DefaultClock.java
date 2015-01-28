@@ -7,9 +7,9 @@ public class DefaultClock extends AbstractClock implements Clock{
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 	private String currentTime = "00:00:00";
 	
-	public DefaultClock(String currentTime, String currentTime2) {
+	public DefaultClock(String currentTime) {
 		super(currentTime);
-		currentTime = currentTime2;
+		this.currentTime = currentTime;
 	}
 
 	@Override

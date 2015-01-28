@@ -17,8 +17,8 @@ public abstract class AbstractClock {
 	}
 	
 	protected String getTimeString(int time){
-		Integer h = time % (60 * 60);
-		Integer m = (time - h * 60 * 60) % 60;
+		Integer h = time / (60 * 60);
+		Integer m = (time - h * 60 * 60) / 60;
 		Integer s = time - h * 60 * 60 - m * 60;
 		return String.valueOf(h) + ":" + String.valueOf(m) + ":" + String.valueOf(s);
 	}
