@@ -1,6 +1,10 @@
 package com.dac.clock;
 
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class DefaultClock extends AbstractClock implements Clock{
+	
+	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 	private String currentTime = "00:00:00";
 	
 	public DefaultClock(String currentTime, String currentTime2) {
@@ -10,39 +14,78 @@ public class DefaultClock extends AbstractClock implements Clock{
 
 	@Override
 	public String getCurrentTime() {
-		return currentTime;
+		lock.readLock().lock();
+		try{
+			return currentTime;
+		}finally{
+			lock.readLock().unlock();
+		}
 	}
 
 	@Override
 	public String pastSecond() {
-		return pastSecond(1);
+		lock.writeLock().lock();
+		try{
+			currentTime = pastSecond(1);
+		}finally{
+			lock.writeLock().unlock();
+		}
+		return currentTime;
 	}
 
 	@Override
 	public String pastMinute() {
-		return pastMinute(1);
+		lock.writeLock().lock();
+		try{
+			currentTime = pastMinute(1);
+		}finally{
+			lock.writeLock().unlock();
+		}
+		return currentTime;
 	}
 
 	@Override
 	public String pastHour() {
-		return pastHour(1);
+		lock.writeLock().lock();
+		try{
+			currentTime = pastHour(1);
+		}finally{
+			lock.writeLock().unlock();
+		}
+		return currentTime;
 	}
 
 	@Override
 	public String pastSecond(int second) {
-		int ss = getTimeInt();
-		int newss = ss + second;
-		return getTimeString(newss);
+		lock.writeLock().lock();
+		try{
+			currentTime = getTimeString(getTimeInt() + second);
+		}finally{
+			lock.writeLock().unlock();
+		}
+		return currentTime;
 	}
 
 	@Override
 	public String pastMinute(int minute) {
-		return getTimeString(minute * 60);
+		lock.writeLock().lock();
+		try{
+			currentTime = getTimeString( getTimeInt() + minute * 60);
+		}finally{
+			lock.writeLock().unlock();
+		}
+		return currentTime;
 	}
 
 	@Override
 	public String pastHour(int hour) {
-		return getTimeString(hour * 60 * 60);
+		lock.writeLock().lock();
+		try{
+			currentTime = getTimeString(hour * 60 * 60);
+		}finally{
+			lock.writeLock().unlock();
+		}
+		return currentTime;
 	}
 	
 	
