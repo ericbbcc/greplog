@@ -1,5 +1,7 @@
 package com.dac.clock;
 
+import com.greplog.clock.DefaultClock;
+
 public class ClockTest {
 	
 	public static void main(String ...s){

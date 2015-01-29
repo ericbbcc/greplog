@@ -1,4 +1,4 @@
-package com.dac.cfg;
+package com.greplog.cfg;
 
 public class LogServer {
 	

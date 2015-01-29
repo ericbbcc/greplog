@@ -1,4 +1,4 @@
-package com.dac.clock;
+package com.greplog.clock;
 
 public abstract class AbstractClock {
 	private String currentTime;

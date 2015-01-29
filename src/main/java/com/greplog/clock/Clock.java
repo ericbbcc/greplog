@@ -1,4 +1,4 @@
-package com.dac.clock;
+package com.greplog.clock;
 
 public interface Clock {
 	int max_seconds = 24 * 60 * 60 - 1;

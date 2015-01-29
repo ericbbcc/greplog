@@ -1,4 +1,4 @@
-package com.dac.clock;
+package com.greplog.clock;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
