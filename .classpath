@@ -17,5 +17,5 @@
 	<classpathentry sourcepath="/Users/andy/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/1.0/b10c90e57b7bb985a7b6a704769428fe5c2a732c/objenesis-1.0-sources.jar" kind="lib" path="/Users/andy/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/1.0/9b473564e792c2bdf1449da1f0b1b5bff9805704/objenesis-1.0.jar" exported="true"/>
 	<classpathentry sourcepath="/Users/andy/.gradle/caches/modules-2/files-2.1/org.apache.mina/mina-core/2.0.7/42097d3346d4fa5d694f2ed6e87a4bf7689cff0e/mina-core-2.0.7-sources.jar" kind="lib" path="/Users/andy/.gradle/caches/modules-2/files-2.1/org.apache.mina/mina-core/2.0.7/c878e2aa82de748474a624ec3933e4604e446dec/mina-core-2.0.7.jar" exported="true"/>
 	<classpathentry sourcepath="/Users/andy/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.2/502e1c764542fe747896c1dc04f023acfe0e5cbc/logback-core-1.1.2-sources.jar" kind="lib" path="/Users/andy/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.2/2d23694879c2c12f125dac5076bdfd5d771cc4cb/logback-core-1.1.2.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/andy/git/dac/logsearcher/libs/sshj-0.12.0-SNAPSHOT.jar" exported="true"/>
+	<classpathentry kind="lib" path="/Users/andy/git/dac/greplog/libs/sshj-0.12.0-SNAPSHOT.jar" exported="true"/>
 </classpath>
