@@ -30,18 +30,21 @@ public class LostFounderTask extends TimerTask{
 	public void run() {
 		int cutting_interval = config.getCutting_interval();
 		String logger_src_dir = config.getLogger_src_dir();
-		List<String> logger_names =  getLoggerNames(new File(logger_src_dir));
+		List<String> loggerNamse = new ArrayList<>();
+		reverseLoggerNames(new File(logger_src_dir), loggerNamse);
+		
 	}
 	
-	private List<String> getLoggerNames(File f){
-		List<String> loggerNames = new ArrayList<String>();
-		if(f.isDirectory()){
-			loggerNames.addAll(getLoggerNames(f));
+	private List<String> reverseLoggerNames(File f, List<String> logger_names){
+		File[] fs = f.listFiles();
+		for(File tmpF : fs){
+			if(tmpF.isDirectory()){
+				logger_names.addAll(reverseLoggerNames(tmpF, logger_names));
+			}else if(tmpF.isFile()){
+				logger_names.add(tmpF.getName());
+			}
 		}
-		String[] fnames = f.list();
-		for(String s : fnames)
-			loggerNames.add(s);
-		return loggerNames;
+		return logger_names;
 	}
 	
 
