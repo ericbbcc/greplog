@@ -17,6 +17,8 @@ public class CacheHolder {
 	/** 爬去日志工作线程池 */
 	private Set<TimerTask> grepLogTasksPool = new ConcurrentSkipListSet<TimerTask>();
 	
+	private String currentTime = GrepLogConfig.START_TIME;
+	
 	private static CacheHolder cache;
 	
 	public static CacheHolder newInstance(){
@@ -25,6 +27,14 @@ public class CacheHolder {
 			return cache;
 		}else
 			return cache;
+	}
+	
+	public synchronized void setCurrentTime(String currentTime){
+		this.currentTime = currentTime;
+	}
+	
+	public synchronized String getCurrentTime(){
+		return this.currentTime;
 	}
 	
 }

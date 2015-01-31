@@ -2,7 +2,7 @@ package com.greplog.clock;
 
 public abstract class AbstractClock {
 	private String currentTime;
-
+	
 	public AbstractClock(String currentTime) {
 		super();
 		this.currentTime = currentTime;

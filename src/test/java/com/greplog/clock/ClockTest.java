@@ -1,4 +1,4 @@
-package com.dac.clock;
+package com.greplog.clock;
 
 import com.greplog.clock.DefaultClock;
 

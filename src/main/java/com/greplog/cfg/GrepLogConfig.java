@@ -12,6 +12,8 @@ import com.grep.exception.ConfigException;
 
 public class GrepLogConfig {
 	private static final Logger LOG = LoggerFactory.getLogger(GrepLogConfig.class);
+	/** 日志起始时间 */
+	public static String START_TIME = "00:00:00";
 	/** 日志服务器IP地址 */
 	private String host_ip;
 	/** 日志服务器SSH服务端口号 */

@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import com.greplog.cfg.CacheHolder;
 import com.greplog.cfg.GrepLogConfig;
+import com.greplog.clock.DefaultClock;
 
 /**
  * 查找缺失的日志分片 
@@ -30,16 +31,19 @@ public class LostFounderTask extends TimerTask{
 	public void run() {
 		int cutting_interval = config.getCutting_interval();
 		String logger_src_dir = config.getLogger_src_dir();
-		List<String> loggerNamse = new ArrayList<>();
-		reverseLoggerNames(new File(logger_src_dir), loggerNamse);
+		List<String> loggerNames = new ArrayList<>();
+		fetchLoggerNames(new File(logger_src_dir), loggerNames);
+		for(String lName : loggerNames){
+			DefaultClock clock = new DefaultClock(GrepLogConfig.START_TIME);
+		}
 		
 	}
 	
-	private List<String> reverseLoggerNames(File f, List<String> logger_names){
+	private List<String> fetchLoggerNames(File f, List<String> logger_names){
 		File[] fs = f.listFiles();
 		for(File tmpF : fs){
 			if(tmpF.isDirectory()){
-				logger_names.addAll(reverseLoggerNames(tmpF, logger_names));
+				logger_names.addAll(fetchLoggerNames(tmpF, logger_names));
 			}else if(tmpF.isFile()){
 				logger_names.add(tmpF.getName());
 			}
