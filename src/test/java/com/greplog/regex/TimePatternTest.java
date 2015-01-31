@@ -11,7 +11,6 @@ public class TimePatternTest {
 		if(m.find())
 			System.out.println(m.group());
 		
-		
 	}
 
 }

@@ -1,9 +1,8 @@
 package com.greplog.server;
 
-public class GrepLog {
+public class GrepLogMain {
 	
 	public static void main(){
 		
 	}
-
 }

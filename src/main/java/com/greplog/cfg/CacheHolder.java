@@ -1,10 +1,8 @@
 package com.greplog.cfg;
 
 import java.util.Queue;
-import java.util.Set;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * 单例、缓存器
@@ -15,9 +13,11 @@ public class CacheHolder {
 	/** 保存检索LostFounderTask任务检索出来丢失的日志分片 */
 	private Queue<String> lostLoggers= new ConcurrentLinkedQueue<String>();
 	/** 爬去日志工作线程池 */
-	private Set<TimerTask> grepLogTasksPool = new ConcurrentSkipListSet<TimerTask>();
+	private Queue<TimerTask> grepLogTasksPool = new ConcurrentLinkedQueue<TimerTask>();
 	
 	private String currentTime = GrepLogConfig.START_TIME;
+	
+	private GrepLogConfig config;
 	
 	private static CacheHolder cache;
 	
@@ -29,12 +29,38 @@ public class CacheHolder {
 			return cache;
 	}
 	
+	public synchronized void addLostLogger(String loggerName){
+		this.lostLoggers.add(loggerName);
+	}
+	
+	public synchronized String getLostLogger(){
+		if(this.lostLoggers.size() != 0)
+			return this.lostLoggers.poll();
+		return null;
+	}
+	
 	public synchronized void setCurrentTime(String currentTime){
 		this.currentTime = currentTime;
 	}
 	
 	public synchronized String getCurrentTime(){
 		return this.currentTime;
+	}
+	
+	public synchronized void addGrepLogTask(TimerTask timerTask){
+		this.grepLogTasksPool.add(timerTask);
+	}
+	
+	public synchronized TimerTask getGrepLogTask(){
+		return this.grepLogTasksPool.poll();
+	}
+	
+	public void setConfig(GrepLogConfig config){
+		this.config = config;
+	}
+	
+	public GrepLogConfig getConfig(){
+		return this.config;
 	}
 	
 }

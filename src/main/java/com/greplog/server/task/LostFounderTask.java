@@ -2,8 +2,12 @@ package com.greplog.server.task;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.greplog.cfg.CacheHolder;
 import com.greplog.cfg.GrepLogConfig;
@@ -29,12 +33,24 @@ public class LostFounderTask extends TimerTask{
 
 	@Override
 	public void run() {
-		int cutting_interval = config.getCutting_interval();
 		String logger_src_dir = config.getLogger_src_dir();
 		List<String> loggerNames = new ArrayList<>();
 		fetchLoggerNames(new File(logger_src_dir), loggerNames);
+		Map<String, Boolean> loggerNameMap = new HashMap<>();
+		Pattern p = Pattern.compile("\\[[0-9]{2}:[0-9]{2}:[0-9]{2}\\]");
 		for(String lName : loggerNames){
-			DefaultClock clock = new DefaultClock(GrepLogConfig.START_TIME);
+			Matcher m = p.matcher(lName);
+			if(m.find()){
+				loggerNameMap.put(m.group(), true);
+			}
+		}
+		int cutting_interval = config.getCutting_interval();
+		CacheHolder cache = CacheHolder.newInstance();
+		DefaultClock clock = new DefaultClock(GrepLogConfig.START_TIME);
+		while(!clock.getCurrentTime().equals(cache.getCurrentTime())){
+			if(null == loggerNameMap.get(clock.getCurrentTime()))
+				cache.addLostLogger(clock.getCurrentTime());
+			clock.pastSecond(cutting_interval);
 		}
 		
 	}
@@ -51,15 +67,4 @@ public class LostFounderTask extends TimerTask{
 		return logger_names;
 	}
 	
-
-	@Override
-	public boolean cancel() {
-		return super.cancel();
-	}
-
-	@Override
-	public long scheduledExecutionTime() {
-		return super.scheduledExecutionTime();
-	}
-
 }
