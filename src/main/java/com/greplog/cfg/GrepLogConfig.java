@@ -9,7 +9,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.grep.exception.ConfigException;
+import com.greplog.exception.ConfigException;
 
 public class GrepLogConfig {
 	private static final Logger LOG = LoggerFactory.getLogger(GrepLogConfig.class);

@@ -1,4 +1,4 @@
-package com.grep.exception;
+package com.greplog.exception;
 
 public class ConfigException extends Exception{
 

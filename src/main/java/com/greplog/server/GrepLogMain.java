@@ -1,8 +1,8 @@
 package com.greplog.server;
 
-import com.grep.exception.ConfigException;
 import com.greplog.cfg.CacheHolder;
 import com.greplog.cfg.GrepLogConfig;
+import com.greplog.exception.ConfigException;
 
 public class GrepLogMain {
 	
