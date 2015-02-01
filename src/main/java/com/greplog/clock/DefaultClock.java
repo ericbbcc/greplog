@@ -7,6 +7,20 @@ public class DefaultClock extends AbstractClock implements Clock{
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 	private String currentTime = "00:00:00";
 	
+	public String getTimeAccuracy(int interval){
+		if(interval < 10)
+			return currentTime;
+		else if(interval < 60 && interval > 9)
+			return currentTime.substring(0, currentTime.length() - 1) + "0";
+		else if(interval >= 60 && interval < 60 * 10)
+			return currentTime.substring(0,  currentTime.length() - 3) + ":00";
+		else if(interval >= 60 * 10 && interval < 60 * 60)
+			return currentTime.substring(0,  currentTime.length() - 4) + "0:00";
+		else if(interval >= 60 * 60 && interval < 10 * 60 * 60)
+			return currentTime.substring(0,  currentTime.length() - 5) + ":00:00";
+		else 
+			return "*";
+	}
 	
 	public DefaultClock(String currentTime) {
 		super(currentTime);

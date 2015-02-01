@@ -3,6 +3,7 @@ package com.greplog.cfg;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -56,8 +57,30 @@ public class GrepLogConfig {
 		}
 	}
 	
-	public void parseProperties(Properties pros){
-		
+	private void parseProperties(Properties pros){
+		for(Entry<Object, Object> entry : pros.entrySet()){
+			String key = entry.getKey().toString().trim();
+			String value = entry.getValue().toString().trim();
+			if(key.equals("host_ip")){
+				host_ip = value;
+			}else if(key.equals("port")){
+				port = Integer.parseInt(value);
+			}else if(key.equals("username")){
+				username = value;
+			}else if(key.equals("password")){
+				password = value;
+			}else if(key.equals("indexer_dir")){
+				indexer_dir = value;
+			}else if(key.equals("logger_src_dir")){
+				logger_src_dir = value;
+			}else if(key.equals("cutting_interval")){
+				cutting_interval = Integer.parseInt(value);
+			}else if(key.equals("min_concurrent_lever")){
+				min_concurrent_lever = Integer.parseInt(value);
+			}else if(key.equals("max_concurrent_lever")){
+				max_concurrent_lever = Integer.parseInt(value);
+			}
+		}
 	}
 
 	public String getHost_ip() {
@@ -131,7 +154,5 @@ public class GrepLogConfig {
 	public void setMax_concurrent_lever(int max_concurrent_lever) {
 		this.max_concurrent_lever = max_concurrent_lever;
 	}
-	
-	
 	
 }

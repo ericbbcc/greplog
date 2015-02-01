@@ -4,8 +4,6 @@ import java.util.Queue;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.jcraft.jsch.UserInfo;
-
 /**
  * 单例、缓存器
  * @author andy
@@ -24,6 +22,7 @@ public class CacheHolder {
 	private static CacheHolder cache;
 	
 	private static Robot userInfo;
+	
 	
 	public CacheHolder() {
 		super();

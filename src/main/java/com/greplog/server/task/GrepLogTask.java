@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import com.greplog.cfg.CacheHolder;
 import com.greplog.clock.DefaultClock;
 import com.greplog.ssh.SSHExec;
+import com.greplog.util.GrepRegexUtils;
 
 /**
  * 下载服务器日志并分片存储在本地
@@ -29,14 +30,17 @@ public class GrepLogTask extends TimerTask{
 		}else{
 			file = new File(cache.getConfig().getLogger_src_dir(), getLoggerName());
 		}
+		//抓取日志并存储在File内
 		if(file != null){
 			try{
-				SSHExec.grep("", file);
+				SSHExec.grep(
+						GrepRegexUtils.convertTime2SSHRegex(
+								new DefaultClock(cache.getCurrentTime()).getTimeAccuracy(cache.getConfig().getCutting_interval())), 
+						file);
 			}catch(Exception e){
 				
 			}
 		}
-			
 	}
 	
 	private String getLoggerName(){
