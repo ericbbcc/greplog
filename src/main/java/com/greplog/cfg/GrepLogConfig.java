@@ -33,10 +33,13 @@ public class GrepLogConfig {
 	private int min_concurrent_lever;
 	/** 最大并发工作线程数 */
 	private int max_concurrent_lever;
+	
+	private String config_dir_path;
+	
 	public void parse(String cfgPath) throws ConfigException{
 		File configFile = new File(cfgPath);
 		LOG.info("Reading configuration from:" + cfgPath);
-		
+		this.config_dir_path = configFile.getParentFile().getPath();
 		try{
 			if(!configFile.exists()){
 				throw new IllegalArgumentException(configFile.toString() +
@@ -154,5 +157,14 @@ public class GrepLogConfig {
 	public void setMax_concurrent_lever(int max_concurrent_lever) {
 		this.max_concurrent_lever = max_concurrent_lever;
 	}
+
+	public String getConfig_dir_path() {
+		return config_dir_path;
+	}
+
+	public void setConfig_dir_path(String config_dir_path) {
+		this.config_dir_path = config_dir_path;
+	}
+	
 	
 }

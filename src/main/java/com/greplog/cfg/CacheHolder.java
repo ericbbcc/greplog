@@ -1,8 +1,14 @@
 package com.greplog.cfg;
 
+import java.io.File;
 import java.util.Queue;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.greplog.util.PersistenceUtils;
 
 /**
  * 单例、缓存器
@@ -10,6 +16,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  */
 public class CacheHolder {
+	
+	private static Logger LOG = LoggerFactory.getLogger(CacheHolder.class);
 	/** 保存检索LostFounderTask任务检索出来丢失的日志分片 */
 	private Queue<String> lostLoggers= new ConcurrentLinkedQueue<String>();
 	/** 爬去日志工作线程池 */
@@ -61,6 +69,11 @@ public class CacheHolder {
 	}
 	
 	public synchronized void setCurrentTime(String currentTime){
+		try{
+			PersistenceUtils.serialize(currentTime, new File(config.getConfig_dir_path()), "currentTime");
+		}catch(Exception e){
+			LOG.error("serialize currentTime error!");
+		}
 		this.currentTime = currentTime;
 	}
 	
